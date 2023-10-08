@@ -1,6 +1,5 @@
 import streamlit as st
 import random
-import matplotlib.pyplot as plt
 import datetime
 import pandas as pd
 import numpy as np
