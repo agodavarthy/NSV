@@ -40,14 +40,14 @@ def prediction(school_level_type, school_address_zip, num_teachers, num_psych_co
     total_risk_factor = risk_factor * (1/10)
     print("Total Risk Factor = ", total_risk_factor)
     if total_risk_factor < 0.3:
-        prediction_result = "Low vulnerability index"
+        prediction_result = "Low vulnerability index - keep up the good work"
         prediction_color = "green"  # Color for a positive result
     elif total_risk_factor >= 0.3 and total_risk_factor < 0.8:
-        prediction_result = "Moderate vulnerability index"
+        prediction_result = "Moderate vulnerability index - close vigilance needed"
         prediction_color = "orange"  # Color for a negative result
 
     else:
-        prediction_result = "High vulnerability index"
+        prediction_result = "High vulnerability index - immediate intervention needed"
         prediction_color = "red"  # Color for a negative result
 
     return prediction_result, prediction_color
@@ -180,7 +180,7 @@ def fillup(row_vals):
     if st.button("Inference"):
         prediction_result, prediction_color = prediction(school_level_type, school_address_zip, num_teachers, num_psych_couns, num_enrolled_students, num_violent_events_total, num_suicide_events, num_times_guns_brought_school, num_bullying_occurrences, school_hours_and_reported_provocation, sporting_event, nearby_school)
         st.markdown(
-            f'<p style="color: {prediction_color}; font-size: 18px;">Inference: {prediction_result}</p>',
+            f'<p style="color: {prediction_color}; font-size: 18px;"> {prediction_result}</p>',
             unsafe_allow_html=True
         )
     st.markdown(
