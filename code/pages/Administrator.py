@@ -196,7 +196,7 @@ def fillup(row_vals):
 
 
 def main():
-    filename = "/Users/archana/nsv/data/12Samples.csv"
+    filename = "data/12Samples.csv"
     sampleData = read_samples(filename)
     num_samples = len(sampleData)
     low = 1
