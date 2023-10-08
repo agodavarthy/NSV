@@ -212,7 +212,6 @@ def main():
     print("session state = ", st.session_state)
     if 'clicked' not in st.session_state:
         #st.session_state.ind = random.sample(range(num_samples), 1)[0]
-        st.session_state.ind = 1
         st.session_state.row_vals = buildDict(sampleData, st.session_state.ind)
 
         print("Hey I came into the if condition of clicked")
