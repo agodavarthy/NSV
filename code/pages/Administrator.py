@@ -10,10 +10,7 @@ def welcome():
     return 'welcome all'
 
 def read_samples(filename):
-    print("Reading the sample file:", filename)
     sample_file = pd.read_csv(filename)
-    print("Type of Data File = ", type(sample_file))
-    print("#Samples = ", len(sample_file))
     return sample_file
     
 def prediction(school_level_type, school_address_zip, num_teachers, num_psych_couns, num_enrolled_students, num_violent_events_total, num_suicide_events, num_times_guns_brought_school, num_bullying_occurrences, school_hours_and_reported_provocation, sporting_event, nearby_school):
@@ -54,11 +51,9 @@ def prediction(school_level_type, school_address_zip, num_teachers, num_psych_co
     return prediction_result, prediction_color
 
 def buildDict(df, row_id):
-    print("I am going into buildDict....")
     row_dic = {}
     colnames = df.columns
     for col in colnames:
-        print("Adding ", df.loc[row_id].at[col], " to dict:", col)
         row_dic[col] = df.loc[row_id].at[col]
     return row_dic
 
@@ -84,10 +79,8 @@ def fillup(row_vals):
     st.session_state.school_name = st.text_input("School Name", st.session_state.schoolName)
 
     school_type_lst = ["", "Elementary", "Middle School", "High School"]
-    print("row_vals['school_level_type'] = ", row_vals['school_level_type'])
     school_type_ind = school_type_lst.index(row_vals["school_level_type"])
     st.session_state.school_level_type = st.selectbox("School Level/Type", school_type_lst, school_type_ind)
-    print("Type of zip code = ", type(row_vals["school_address_zip"]))
     zip_code = str(row_vals["school_address_zip"])
     if len(zip_code) < 5:
         while len(zip_code) < 5:
@@ -211,10 +204,9 @@ def main():
     #st.title("School Risk Assessment Form")
     print("session state = ", st.session_state)
     if 'clicked' not in st.session_state:
-        #st.session_state.ind = random.sample(range(num_samples), 1)[0]
+        st.session_state.ind = random.sample(range(num_samples), 1)[0]
         st.session_state.row_vals = buildDict(sampleData, st.session_state.ind)
 
-        print("Hey I came into the if condition of clicked")
         st.session_state.clicked = False
     fillup(st.session_state.row_vals)
 
