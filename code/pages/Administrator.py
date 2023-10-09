@@ -178,14 +178,25 @@ def fillup(row_vals):
             #dates_of_reports = st.text_input("Dates of reports?", row_vals["dates_of_reports"])
     result = ""
 
-    st.button('Inference', on_click=click_button)
-    if st.session_state.clicked:
+    st.session_state.button = st.button('Inference', on_click=click_button)
+    if st.session_state.button:
         prediction_result, prediction_color = prediction(st.session_state.school_level_type, st.session_state.school_address_zip, st.session_state.num_teachers, st.session_state.num_psych_couns, st.session_state.num_enrolled_students, st.session_state.num_violent_events_total, st.session_state.num_suicide_events, st.session_state.num_times_guns_brought_school, st.session_state.num_bullying_occurrences, st.session_state.school_hours_and_reported_provocation, st.session_state.sporting_event, st.session_state.nearby_school)
+        #st.session_state.inference_text =  st.text("", "")
+        #st.markdown(
+        #"""
+        #f'<p style="color: {prediction_color}; font-size: 18px;"> {prediction_result}</p>'
+        #""",
+        #unsafe_allow_html=True,
+        #)
+		#st.text(f'<p style="color: {prediction_color}; font-size: 18px;"> {prediction_result}</p>')
         st.markdown(
-            f'<p style="color: {prediction_color}; font-size: 18px;"> {prediction_result}</p>',
+           f'<p style="color: {prediction_color}; font-size: 18px;"> {prediction_result}</p>',
             unsafe_allow_html=True
         )
-        st.session_state.clicked = False
+        st.session_state.button = False
+        #st.session_state.inference_text = " "
+        #st.inference("")
+        
     st.markdown(
     """
     <div style="background-color:lightgray">
