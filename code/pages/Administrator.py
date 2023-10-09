@@ -185,6 +185,7 @@ def fillup(row_vals):
             f'<p style="color: {prediction_color}; font-size: 18px;"> {prediction_result}</p>',
             unsafe_allow_html=True
         )
+        st.session_state.clicked = False
     st.markdown(
     """
     <div style="background-color:lightgray">
