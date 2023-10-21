@@ -1,0 +1,388 @@
+--------------------------------------------------------------------------------
+Codebook for NHGIS data file 'nhgis0001_ds254_20215_county'
+--------------------------------------------------------------------------------
+ 
+Contents
+    - Data Summary
+    - Data Dictionary
+    - Citation and Use
+ 
+Additional documentation on NHGIS data sources is available at: 
+    https://www.nhgis.org/documentation/tabular-data 
+ 
+--------------------------------------------------------------------------------
+Data Summary
+--------------------------------------------------------------------------------
+ 
+Year:             2017-2021
+Geographic level: County (by State)
+Dataset:          2021 American Community Survey: 5-Year Data [2017-2021, Block Groups & Larger Areas]
+   NHGIS code:    2017_2021_ACS5a
+   NHGIS ID:      ds254
+Breakdown(s):     Geographic Component:
+                     Total area (00)
+Data type(s):     (E) Estimates
+                  (M) Margins of error
+ 
+Tables:
+ 
+1. Race
+   Universe:    Total population
+   Source code: B02001
+   NHGIS code:  AON5
+ 
+2. Educational Attainment for the Population 25 Years and Over
+   Universe:    Population 25 years and over
+   Source code: B15003
+   NHGIS code:  AOP8
+ 
+3. Ratio of Income to Poverty Level in the Past 12 Months
+   Universe:    Population for whom poverty status is determined
+   Source code: C17002
+   NHGIS code:  AOXW
+ 
+4. Median Household Income in the Past 12 Months (in 2021 Inflation-Adjusted Dollars)
+   Universe:    Households
+   Source code: B19013
+   NHGIS code:  AOQI
+ 
+5. Public Assistance Income or Food Stamps/SNAP in the Past 12 Months for Households
+   Universe:    Households
+   Source code: B19058
+   NHGIS code:  AOQ3
+ 
+6. Employment Status for the Population 16 Years and Over
+   Universe:    Population 16 years and over
+   Source code: B23025
+   NHGIS code:  AOSJ
+ 
+7. Gross Rent as a Percentage of Household Income in the Past 12 Months
+   Universe:    Renter-occupied housing units
+   Source code: B25070
+   NHGIS code:  AOUF
+ 
+8. Allocation of Race
+   Universe:    Total population
+   Source code: B99021
+   NHGIS code:  AOVR
+ 
+--------------------------------------------------------------------------------
+Data Dictionary
+--------------------------------------------------------------------------------
+ 
+Context Fields 
+        GISJOIN:     GIS Join Match Code
+        YEAR:        Data File Year
+        STUSAB:      State/US-Abbreviation (USPS)
+        REGIONA:     Region Code
+        DIVISIONA:   Division Code
+        STATE:       State Name
+        STATEA:      State Code
+        COUNTY:      County Name
+        COUNTYA:     County Code
+        COUSUBA:     County Subdivision Code
+        PLACEA:      Place/Remainder Code
+        TRACTA:      Census Tract Code
+        BLKGRPA:     Block Group Code
+        CONCITA:     Consolidated City Code
+        AIANHHA:     American Indian Area/Alaska Native Area/Hawaiian Home Land Code
+        RES_ONLYA:   American Indian Area/Alaska Native Area (Reservation or Statistical Entity Only) Code
+        TRUSTA:      American Indian Area (Off-Reservation Trust Land Only)/Hawaiian Home Land Code
+        AIHHTLI:     American Indian/Hawaiian Home Land Trust Land Indicator
+        AITSA:       Tribal Subdivision/Remainder Code
+        ANRCA:       Alaska Native Regional Corporation Code
+        CBSAA:       Metropolitan Statistical Area/Micropolitan Statistical Area Code
+        CSAA:        Combined Statistical Area Code
+        METDIVA:     Metropolitan Division Code
+        NECTAA:      New England City and Town Area Code
+        CNECTAA:     Combined New England City and Town Area Code
+        NECTADIVA:   New England City and Town Area Division Code
+        UAA:         Urban Area Code
+        CDCURRA:     Congressional District (2019-2021, 116th Congress) Code
+        SLDUA:       State Legislative District (Upper Chamber) Code
+        SLDLA:       State Legislative District (Lower Chamber) Code
+        ZCTA5A:      5-Digit ZIP Code Tabulation Area Code
+        SUBMCDA:     Subminor Civil Division Code
+        SDELMA:      School District (Elementary)/Remainder Code
+        SDSECA:      School District (Secondary)/Remainder Code
+        SDUNIA:      School District (Unified)/Remainder Code
+        PCI:         Metropolitan/Micropolitan Principal City Indicator
+        PUMAA:       Public Use Microdata Area Code
+        GEO_ID:      Census Geographic Area Identifier
+        BTTRA:       Tribal Census Tract Code
+        BTBGA:       Tribal Block Group Code
+        TL_GEO_ID:   TIGER/Line Shapefile Geographic Area Identifier
+ 
+Data Type (E):
+    Estimates
+ 
+        NAME_E:      Geographic Area Full Name
+ 
+    Table 1:     Race
+    Universe:    Total population
+    Source code: B02001
+    NHGIS code:  AON5
+        AON5E001:    Total
+        AON5E002:    White alone
+        AON5E003:    Black or African American alone
+        AON5E004:    American Indian and Alaska Native alone
+        AON5E005:    Asian alone
+        AON5E006:    Native Hawaiian and Other Pacific Islander alone
+        AON5E007:    Some other race alone
+        AON5E008:    Two or more races
+        AON5E009:    Two or more races: Two races including Some other race
+        AON5E010:    Two or more races: Two races excluding Some other race, and three or more races
+ 
+    Table 2:     Educational Attainment for the Population 25 Years and Over
+    Universe:    Population 25 years and over
+    Source code: B15003
+    NHGIS code:  AOP8
+        AOP8E001:    Total
+        AOP8E002:    No schooling completed
+        AOP8E003:    Nursery school
+        AOP8E004:    Kindergarten
+        AOP8E005:    1st grade
+        AOP8E006:    2nd grade
+        AOP8E007:    3rd grade
+        AOP8E008:    4th grade
+        AOP8E009:    5th grade
+        AOP8E010:    6th grade
+        AOP8E011:    7th grade
+        AOP8E012:    8th grade
+        AOP8E013:    9th grade
+        AOP8E014:    10th grade
+        AOP8E015:    11th grade
+        AOP8E016:    12th grade, no diploma
+        AOP8E017:    Regular high school diploma
+        AOP8E018:    GED or alternative credential
+        AOP8E019:    Some college, less than 1 year
+        AOP8E020:    Some college, 1 or more years, no degree
+        AOP8E021:    Associate's degree
+        AOP8E022:    Bachelor's degree
+        AOP8E023:    Master's degree
+        AOP8E024:    Professional school degree
+        AOP8E025:    Doctorate degree
+ 
+    Table 3:     Ratio of Income to Poverty Level in the Past 12 Months
+    Universe:    Population for whom poverty status is determined
+    Source code: C17002
+    NHGIS code:  AOXW
+        AOXWE001:    Total
+        AOXWE002:    Under .50
+        AOXWE003:    .50 to .99
+        AOXWE004:    1.00 to 1.24
+        AOXWE005:    1.25 to 1.49
+        AOXWE006:    1.50 to 1.84
+        AOXWE007:    1.85 to 1.99
+        AOXWE008:    2.00 and over
+ 
+    Table 4:     Median Household Income in the Past 12 Months (in 2021 Inflation-Adjusted Dollars)
+    Universe:    Households
+    Source code: B19013
+    NHGIS code:  AOQI
+        AOQIE001:    Median household income in the past 12 months (in 2021 inflation-adjusted dollars)
+ 
+    Table 5:     Public Assistance Income or Food Stamps/SNAP in the Past 12 Months for Households
+    Universe:    Households
+    Source code: B19058
+    NHGIS code:  AOQ3
+        AOQ3E001:    Total
+        AOQ3E002:    With cash public assistance or Food Stamps/SNAP
+        AOQ3E003:    No cash public assistance or Food Stamps/SNAP
+ 
+    Table 6:     Employment Status for the Population 16 Years and Over
+    Universe:    Population 16 years and over
+    Source code: B23025
+    NHGIS code:  AOSJ
+        AOSJE001:    Total
+        AOSJE002:    In labor force
+        AOSJE003:    In labor force: Civilian labor force
+        AOSJE004:    In labor force: Civilian labor force: Employed
+        AOSJE005:    In labor force: Civilian labor force: Unemployed
+        AOSJE006:    In labor force: Armed Forces
+        AOSJE007:    Not in labor force
+ 
+    Table 7:     Gross Rent as a Percentage of Household Income in the Past 12 Months
+    Universe:    Renter-occupied housing units
+    Source code: B25070
+    NHGIS code:  AOUF
+        AOUFE001:    Total
+        AOUFE002:    Less than 10.0 percent
+        AOUFE003:    10.0 to 14.9 percent
+        AOUFE004:    15.0 to 19.9 percent
+        AOUFE005:    20.0 to 24.9 percent
+        AOUFE006:    25.0 to 29.9 percent
+        AOUFE007:    30.0 to 34.9 percent
+        AOUFE008:    35.0 to 39.9 percent
+        AOUFE009:    40.0 to 49.9 percent
+        AOUFE010:    50.0 percent or more
+        AOUFE011:    Not computed
+ 
+    Table 8:     Allocation of Race
+    Universe:    Total population
+    Source code: B99021
+    NHGIS code:  AOVR
+        AOVRE001:    Total
+        AOVRE002:    Allocated
+        AOVRE003:    Not allocated
+ 
+Data Type (M):
+    Margins of error
+ 
+        NAME_M:      Geographic Area Full Name
+ 
+    Table 1:     Race
+    Universe:    Total population
+    Source code: B02001
+    NHGIS code:  AON5
+        AON5M001:    Total
+        AON5M002:    White alone
+        AON5M003:    Black or African American alone
+        AON5M004:    American Indian and Alaska Native alone
+        AON5M005:    Asian alone
+        AON5M006:    Native Hawaiian and Other Pacific Islander alone
+        AON5M007:    Some other race alone
+        AON5M008:    Two or more races
+        AON5M009:    Two or more races: Two races including Some other race
+        AON5M010:    Two or more races: Two races excluding Some other race, and three or more races
+ 
+    Table 2:     Educational Attainment for the Population 25 Years and Over
+    Universe:    Population 25 years and over
+    Source code: B15003
+    NHGIS code:  AOP8
+        AOP8M001:    Total
+        AOP8M002:    No schooling completed
+        AOP8M003:    Nursery school
+        AOP8M004:    Kindergarten
+        AOP8M005:    1st grade
+        AOP8M006:    2nd grade
+        AOP8M007:    3rd grade
+        AOP8M008:    4th grade
+        AOP8M009:    5th grade
+        AOP8M010:    6th grade
+        AOP8M011:    7th grade
+        AOP8M012:    8th grade
+        AOP8M013:    9th grade
+        AOP8M014:    10th grade
+        AOP8M015:    11th grade
+        AOP8M016:    12th grade, no diploma
+        AOP8M017:    Regular high school diploma
+        AOP8M018:    GED or alternative credential
+        AOP8M019:    Some college, less than 1 year
+        AOP8M020:    Some college, 1 or more years, no degree
+        AOP8M021:    Associate's degree
+        AOP8M022:    Bachelor's degree
+        AOP8M023:    Master's degree
+        AOP8M024:    Professional school degree
+        AOP8M025:    Doctorate degree
+ 
+    Table 3:     Ratio of Income to Poverty Level in the Past 12 Months
+    Universe:    Population for whom poverty status is determined
+    Source code: C17002
+    NHGIS code:  AOXW
+        AOXWM001:    Total
+        AOXWM002:    Under .50
+        AOXWM003:    .50 to .99
+        AOXWM004:    1.00 to 1.24
+        AOXWM005:    1.25 to 1.49
+        AOXWM006:    1.50 to 1.84
+        AOXWM007:    1.85 to 1.99
+        AOXWM008:    2.00 and over
+ 
+    Table 4:     Median Household Income in the Past 12 Months (in 2021 Inflation-Adjusted Dollars)
+    Universe:    Households
+    Source code: B19013
+    NHGIS code:  AOQI
+        AOQIM001:    Median household income in the past 12 months (in 2021 inflation-adjusted dollars)
+ 
+    Table 5:     Public Assistance Income or Food Stamps/SNAP in the Past 12 Months for Households
+    Universe:    Households
+    Source code: B19058
+    NHGIS code:  AOQ3
+        AOQ3M001:    Total
+        AOQ3M002:    With cash public assistance or Food Stamps/SNAP
+        AOQ3M003:    No cash public assistance or Food Stamps/SNAP
+ 
+    Table 6:     Employment Status for the Population 16 Years and Over
+    Universe:    Population 16 years and over
+    Source code: B23025
+    NHGIS code:  AOSJ
+        AOSJM001:    Total
+        AOSJM002:    In labor force
+        AOSJM003:    In labor force: Civilian labor force
+        AOSJM004:    In labor force: Civilian labor force: Employed
+        AOSJM005:    In labor force: Civilian labor force: Unemployed
+        AOSJM006:    In labor force: Armed Forces
+        AOSJM007:    Not in labor force
+ 
+    Table 7:     Gross Rent as a Percentage of Household Income in the Past 12 Months
+    Universe:    Renter-occupied housing units
+    Source code: B25070
+    NHGIS code:  AOUF
+        AOUFM001:    Total
+        AOUFM002:    Less than 10.0 percent
+        AOUFM003:    10.0 to 14.9 percent
+        AOUFM004:    15.0 to 19.9 percent
+        AOUFM005:    20.0 to 24.9 percent
+        AOUFM006:    25.0 to 29.9 percent
+        AOUFM007:    30.0 to 34.9 percent
+        AOUFM008:    35.0 to 39.9 percent
+        AOUFM009:    40.0 to 49.9 percent
+        AOUFM010:    50.0 percent or more
+        AOUFM011:    Not computed
+ 
+    Table 8:     Allocation of Race
+    Universe:    Total population
+    Source code: B99021
+    NHGIS code:  AOVR
+        AOVRM001:    Total
+        AOVRM002:    Allocated
+        AOVRM003:    Not allocated
+ 
+--------------------------------------------------------------------------------
+Citation and Use of NHGIS Data
+--------------------------------------------------------------------------------
+ 
+All persons are granted a limited license to use this documentation and the
+accompanying data, subject to the following conditions:
+
+* REDISTRIBUTION: You will not redistribute the data without permission.
+
+  You may publish a subset of the data to meet journal requirements for accessing 
+  data related to a particular publication. Contact us for permission for any other 
+  redistribution; we will consider requests for free and commercial redistribution.
+
+* CITATION: You will cite NHGIS appropriately.
+
+    * Publications and research reports employing NHGIS data (either tabular or GIS) 
+      should include the following citation:
+
+        Steven Manson, Jonathan Schroeder, David Van Riper, Tracy Kugler, and Steven Ruggles. 
+        IPUMS National Historical Geographic Information System: Version 17.0 
+        [dataset]. Minneapolis, MN: IPUMS. 2022. 
+        http://doi.org/10.18128/D050.V17.0
+
+    * For policy briefs, online resources, or articles in the popular press, we 
+      recommend that you cite the use of NHGIS data as follows:
+
+        IPUMS NHGIS, University of Minnesota, www.nhgis.org.
+
+These terms of use are a legally binding agreement. You can use the data only in 
+accordance with these terms, and any other use is a violation of the agreement. 
+Violations may result in revocation of the agreement and prohibition from using other 
+IPUMS data. If IPUMS or our partners are harmed from your violation, you are 
+responsible for all damages, including reasonable attorney's fees and expenses.
+        
+In addition, we request that users send us a copy of any publications, research
+reports, or educational material making use of the data or documentation.
+
+Send electronic material to: nhgis@umn.edu
+
+Printed matter should be sent to:
+
+    IPUMS NHGIS
+    Institute for Social Research and Data Innovation
+    University of Minnesota
+    50 Willey Hall
+    225 19th Ave S
+    Minneapolis, MN 55455

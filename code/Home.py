@@ -30,7 +30,7 @@ def set_jpeg_as_page_bg(jpeg_file):
 def main():
     st.title("SafeSchoolNetwork")
 
-    set_jpeg_as_page_bg('data/classroom.jpeg')
+    set_jpeg_as_page_bg('../data/classroom.jpeg')
     #st.sidebar.success("")
 
 if __name__ == '__main__':
