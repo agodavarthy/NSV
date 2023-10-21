@@ -1,5 +1,0 @@
-censusgeocode==0.5.2
-geopy==2.4.0
-matplotlib==3.8.0
-plotnine==0.12.3
-streamlit==1.26.0
