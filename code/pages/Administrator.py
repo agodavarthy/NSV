@@ -231,11 +231,11 @@ def fillup(row_vals, geo_lookup, risk_factor_lookup):
     )
 
 def main():
-    filename = "data/12Samples.csv"
+    filename = "../data/12Samples.csv"
     sampleData = read_samples(filename)
     num_samples = len(sampleData)
-    geo_lookup = pd.read_csv('data/geo_lookup.csv')
-    risk_factor_lookup = pd.read_csv('data/risk_factor_lookup.csv')
+    geo_lookup = pd.read_csv('../data/geo_lookup.csv')
+    risk_factor_lookup = pd.read_csv('../data/risk_factor_lookup.csv')
 
     #ind = random.randint(0, num_samples-1)
     #st.title("School Risk Assessment Form")
