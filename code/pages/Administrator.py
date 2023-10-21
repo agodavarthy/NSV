@@ -4,6 +4,9 @@ import datetime
 import pandas as pd
 import numpy as np
 import math
+import swb_noschoolviolence_analysis as swd
+
+
 #import SessionState
 
 def welcome():
@@ -60,7 +63,7 @@ def buildDict(df, row_id):
 def click_button():
     st.session_state.clicked = True
     
-def fillup(row_vals):
+def fillup(row_vals, geo_lookup, risk_factor_lookup):
     st.title("School Risk Assessment Form")
     st.markdown(
     """
@@ -73,10 +76,15 @@ def fillup(row_vals):
     unsafe_allow_html=True,
     )
     #st.markdown(nsv_caption, unsafe_allow_html=True)
-    st.session_state.schoolName = ""
-    if not math.isnan(row_vals["school_name"]):
-       st.session_state. schoolName = row_vals["school_name"]
-    st.session_state.school_name = st.text_input("School Name", st.session_state.schoolName)
+    st.session_state.county = ""
+    if row_vals["county"]:
+       st.session_state.county = row_vals["county"]
+    st.session_state.county= st.text_input("School County", st.session_state.county)
+
+    st.session_state.state = ""
+    if row_vals["state"]:
+       st.session_state.state = row_vals["state"]
+    st.session_state.state = st.text_input("School State", st.session_state.state)
 
     school_type_lst = ["", "Elementary", "Middle School", "High School"]
     school_type_ind = school_type_lst.index(row_vals["school_level_type"])
@@ -180,7 +188,21 @@ def fillup(row_vals):
 
     st.session_state.button = st.button('Inference', on_click=click_button)
     if st.session_state.button:
-        prediction_result, prediction_color = prediction(st.session_state.school_level_type, st.session_state.school_address_zip, st.session_state.num_teachers, st.session_state.num_psych_couns, st.session_state.num_enrolled_students, st.session_state.num_violent_events_total, st.session_state.num_suicide_events, st.session_state.num_times_guns_brought_school, st.session_state.num_bullying_occurrences, st.session_state.school_hours_and_reported_provocation, st.session_state.sporting_event, st.session_state.nearby_school)
+        #prediction_result, prediction_color = prediction(st.session_state.school_level_type, st.session_state.school_address_zip, st.session_state.num_teachers, st.session_state.num_psych_couns, st.session_state.num_enrolled_students, st.session_state.num_violent_events_total, st.session_state.num_suicide_events, st.session_state.num_times_guns_brought_school, st.session_state.num_bullying_occurrences, st.session_state.school_hours_and_reported_provocation, st.session_state.sporting_event, st.session_state.nearby_school)
+        risk_levels = swd.geo_risk_lookup(county=st.session_state.county, state=st.session_state.state, geo_lookup=geo_lookup, risk_factor_lookup=risk_factor_lookup)
+        print(type(risk_levels))
+        print(risk_levels.iloc[0]["violance occurance rate"])
+        total_risk_factor = risk_levels.iloc[0]["violance occurance rate"] 
+        if total_risk_factor < 0.3:
+            prediction_result = "Low vulnerability index - keep up the good work"
+            prediction_color = "green"  # Color for a positive result
+        elif total_risk_factor >= 0.3 and total_risk_factor < 0.8:
+            prediction_result = "Moderate vulnerability index - close vigilance needed"
+            prediction_color = "orange"  # Color for a negative result
+        else:
+            prediction_result = "High vulnerability index - immediate corrective action required"
+            prediction_color = "red"  # Color for a negative result
+
         #st.session_state.inference_text =  st.text("", "")
         #st.markdown(
         #"""
@@ -212,6 +234,9 @@ def main():
     filename = "data/12Samples.csv"
     sampleData = read_samples(filename)
     num_samples = len(sampleData)
+    geo_lookup = pd.read_csv('data/geo_lookup.csv')
+    risk_factor_lookup = pd.read_csv('data/risk_factor_lookup.csv')
+
     #ind = random.randint(0, num_samples-1)
     #st.title("School Risk Assessment Form")
     print("session state = ", st.session_state)
@@ -220,7 +245,7 @@ def main():
         st.session_state.row_vals = buildDict(sampleData, st.session_state.ind)
 
         st.session_state.clicked = False
-    fillup(st.session_state.row_vals)
+    fillup(st.session_state.row_vals, geo_lookup, risk_factor_lookup)
 
     
 if __name__ == '__main__':
