@@ -5,7 +5,8 @@ import sys
 
 import pandas as pd
 
-from geopy.geocoders import Nominatim
+from geopy
+#from geopy.geocoders import Nominatim
 
 import requests
 import urllib
@@ -98,7 +99,7 @@ def get_FIPS(lat, lon, fips):
   return data['County']['FIPS']
 
 # Initialize Nominatim API - we use this api to run the search
-geolocator = Nominatim(user_agent="MyApp")
+geolocator = geopy.geocoders.Nominatim(user_agent="MyApp")
 
 add_lat_long = False # change to True if running this code for the first time. Takes ~2 hours to complete for. ~1,500 schools
 
