@@ -62,6 +62,7 @@ requests-toolbelt==0.10.1
 rich==13.5.3
 rpds-py==0.10.3
 rubicon-objc==0.4.6
+scikit-learn
 scipy==1.11.3
 six==1.16.0
 smmap==5.0.1
