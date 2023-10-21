@@ -1,26 +1,15 @@
 import pandas as pd
 import numpy as np
-#import plotnine as ggplot
 import sys
-
 import pandas as pd
-
-import geopy
-#from geopy.geocoders import Nominatim
-
+from geopy.geocoders import Nominatim
 import requests
 import urllib
 import time
-
-# Commented out IPython magic to ensure Python compatibility.
 import matplotlib.pyplot as plt
-# %matplotlib inline
-
-analysis_dir = ""
-sys.path.append(analysis_dir)
 
 # Load NoSchoolViolence Data
-df = pd.read_csv(analysis_dir + 'data/K-12 SSDB (Public).csv')
+df = pd.read_csv('data/K-12 SSDB (Public).csv')
 df.head()
 
 """# Part 1: Supplement School Violence Data
@@ -99,7 +88,7 @@ def get_FIPS(lat, lon, fips):
   return data['County']['FIPS']
 
 # Initialize Nominatim API - we use this api to run the search
-geolocator = geopy.geocoders.Nominatim(user_agent="MyApp")
+geolocator = Nominatim(user_agent="MyApp")
 
 add_lat_long = False # change to True if running this code for the first time. Takes ~2 hours to complete for. ~1,500 schools
 
@@ -107,14 +96,14 @@ if add_lat_long:
   # add lat, long
   df['idx'] = df.index
   df = df.apply(add_coordinates, axis=1)
-  df.to_csv(analysis_dir + 'data/K-12 SSDB (Public)_with_coordinates.csv')
+  df.to_csv('data/K-12 SSDB (Public)_with_coordinates.csv')
 
   # add FIPS
   df['FIPS'] = np.nan
   df['FIPS'] = df.apply(lambda x : get_FIPS(x['latitude'], x['longitude'], x['FIPS']), axis=1)
-  df.to_csv(analysis_dir + 'K-12 SSDB (Public)_with_FIPS.csv')
+  df.to_csv('K-12 SSDB (Public)_with_FIPS.csv')
 else:
-  df = pd.read_csv(analysis_dir + 'data/K-12 SSDB (Public)_with_FIPS.csv')
+  df = pd.read_csv('data/K-12 SSDB (Public)_with_FIPS.csv')
 
 """### Add Census Data
 
@@ -128,7 +117,7 @@ https://www.statology.org/shannon-diversity-index/
 
 key = '0a5a2fa2a4794c69a13e1bc8f6c57c60af6a4315' # You don't need the census key for the data when pulling data from https://www.nhgis.org/
 
-supplemental_census = pd.read_csv(analysis_dir + 'data/nhgis0001_ds254_20215_county.csv', encoding = "ISO-8859-1")
+supplemental_census = pd.read_csv('data/nhgis0001_ds254_20215_county.csv', encoding = "ISO-8859-1")
 
 # create single FIPS code3 for supplemental data
 supplemental_census['COUNTYA'] = supplemental_census['COUNTYA'].astype(str)
@@ -172,7 +161,7 @@ supplemental_census = supplemental_census[final_cols]
 Crime data at the county level is very difficult to acquire. The closest thing is the FBI UCR database: https://cde.ucr.cjis.gov/LATEST/webapp/#. But you have to download a 4GB master file and the data is very messy. Someone has already [aggregated some crime data in 2001.](https://www.icpsr.umich.edu/web/NACJD/studies/3451/variables?start=0&STUDYQ=3451&EXTERNAL_FLAG=1&ARCHIVE=NACJD&sort=STUDYID%20asc%2CDATASETID%20asc%2CSTARTPOS%20asc&rows=50&q=ds1) For simplicity I use this analysis.
 """
 
-supplemental_crime = pd.read_csv(analysis_dir + 'data/UCI_crimedata_2001.csv')
+supplemental_crime = pd.read_csv('data/UCI_crimedata_2001.csv')
 
 supplemental_crime.columns
 
@@ -198,7 +187,7 @@ crime_cols = ['GRNDTOT', 'DRUGTOT', 'WEAPONS']
 #convert to percentiles
 supplemental_data[crime_cols] = supplemental_data[crime_cols].div(supplemental_data['Total'], axis=0).rank(pct=True)
 
-supplemental_data.to_csv(analysis_dir + 'data/K-12 SSDB (Public)_w_supplemental_data.csv')
+supplemental_data.to_csv('data/K-12 SSDB (Public)_w_supplemental_data.csv')
 
 """# Analysis
 
@@ -344,9 +333,9 @@ se_lookup.head()
 """## Save Everything we need for the Demo"""
 
 analysis_df.rename(columns=col_map, inplace=True)
-analysis_df.to_csv(analysis_dir + 'data/geo_lookup.csv')
+analysis_df.to_csv('data/geo_lookup.csv')
 
-se_lookup.to_csv(analysis_dir + 'data/risk_factor_lookup.csv')
+se_lookup.to_csv('data/risk_factor_lookup.csv')
 
 def geo_risk_lookup(county, state, geo_lookup, risk_factor_lookup, print_high_risk=True):
   """
@@ -389,10 +378,10 @@ def geo_risk_lookup(county, state, geo_lookup, risk_factor_lookup, print_high_ri
   risk_levels.columns = ['factor', 'percentile',  'violance occurance rate', 'risk_level']
   return risk_levels
 
-"""# Demo"""
+"""# Demo
 print("Lets see....")
-geo_lookup = pd.read_csv(analysis_dir + 'data/geo_lookup.csv')
-risk_factor_lookup = pd.read_csv(analysis_dir + 'data/risk_factor_lookup.csv')
+geo_lookup = pd.read_csv('data/geo_lookup.csv')
+risk_factor_lookup = pd.read_csv('data/risk_factor_lookup.csv')
 
 analysis_df.tail(30)
 
@@ -403,4 +392,4 @@ risk_levels = geo_risk_lookup(county='Big Horn County',
                 risk_factor_lookup=risk_factor_lookup)
 
 print(risk_levels)
-
+"""
