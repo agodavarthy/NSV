@@ -242,8 +242,7 @@ def main():
     #st.title("School Risk Assessment Form")
     print("session state = ", st.session_state)
     if 'clicked' not in st.session_state:
-        #Archanast.session_state.ind = random.sample(range(num_samples), 1)[0]
-        st.session_state.ind = 5
+        st.session_state.ind = random.sample(range(num_samples), 1)[0]
         st.session_state.row_vals = buildDict(sampleData, st.session_state.ind)
 
         st.session_state.clicked = False
