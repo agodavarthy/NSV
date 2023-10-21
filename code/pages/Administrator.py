@@ -189,7 +189,7 @@ def fillup(row_vals, geo_lookup, risk_factor_lookup):
     st.session_state.button = st.button('Inference', on_click=click_button)
     if st.session_state.button:
         #prediction_result, prediction_color = prediction(st.session_state.school_level_type, st.session_state.school_address_zip, st.session_state.num_teachers, st.session_state.num_psych_couns, st.session_state.num_enrolled_students, st.session_state.num_violent_events_total, st.session_state.num_suicide_events, st.session_state.num_times_guns_brought_school, st.session_state.num_bullying_occurrences, st.session_state.school_hours_and_reported_provocation, st.session_state.sporting_event, st.session_state.nearby_school)
-        risk_levels = code.swb_noschoolviolence_analysis.geo_risk_lookup(county=st.session_state.county, state=st.session_state.state, geo_lookup=geo_lookup, risk_factor_lookup=risk_factor_lookup)
+        risk_levels = /app/nsv/code/swb_noschoolviolence_analysis.geo_risk_lookup(county=st.session_state.county, state=st.session_state.state, geo_lookup=geo_lookup, risk_factor_lookup=risk_factor_lookup)
         print(type(risk_levels))
         print(risk_levels.iloc[0]["violance occurance rate"])
         total_risk_factor = risk_levels.iloc[0]["violance occurance rate"] 
