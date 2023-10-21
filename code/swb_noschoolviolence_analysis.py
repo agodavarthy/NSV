@@ -5,7 +5,7 @@ import sys
 
 import pandas as pd
 
-from geopy
+import geopy
 #from geopy.geocoders import Nominatim
 
 import requests
