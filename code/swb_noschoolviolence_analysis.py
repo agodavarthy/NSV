@@ -16,7 +16,7 @@ import time
 import matplotlib.pyplot as plt
 # %matplotlib inline
 
-analysis_dir = "../"
+analysis_dir = ""
 sys.path.append(analysis_dir)
 
 # Load NoSchoolViolence Data
