@@ -193,16 +193,20 @@ def fillup(row_vals, geo_lookup, risk_factor_lookup):
         risk_levels = swb.geo_risk_lookup(county=st.session_state.county, state=st.session_state.state, geo_lookup=geo_lookup, risk_factor_lookup=risk_factor_lookup)
         print(type(risk_levels))
         print(risk_levels.iloc[0]["violance occurance rate"])
-        total_risk_factor = risk_levels.iloc[0]["violance occurance rate"] 
-        if total_risk_factor < 0.3:
+        print(risk_levels.iloc[0]["risk_level"])
+        total_risk_factor = risk_levels.iloc[0]["risk_level"] 
+        if total_risk_factor =="low" or total_risk_factor == "very low":
             prediction_result = "Low vulnerability index - keep up the good work"
             prediction_color = "green"  # Color for a positive result
-        elif total_risk_factor >= 0.3 and total_risk_factor < 0.8:
+        elif total_risk_factor == "medium":
             prediction_result = "Moderate vulnerability index - close vigilance needed"
             prediction_color = "orange"  # Color for a negative result
-        else:
+        elif total_risk_factor == "high":
             prediction_result = "High vulnerability index - immediate corrective action required"
             prediction_color = "red"  # Color for a negative result
+        else:
+            prediction_result = "Invalid county info not available"
+            prediction_color = "black"  # Color for a negative result
 
         #st.session_state.inference_text =  st.text("", "")
         #st.markdown(
