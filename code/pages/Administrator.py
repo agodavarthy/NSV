@@ -254,8 +254,6 @@ def main():
     geo_lookup = pd.read_csv('data/geo_lookup.csv')
     risk_factor_lookup = pd.read_csv('data/risk_factor_lookup.csv')
 
-    states = getStatesFromDB(geo_lookup)
- 
     #ind = random.randint(0, num_samples-1)
     #st.title("School Risk Assessment Form")
     print("session state = ", st.session_state)
