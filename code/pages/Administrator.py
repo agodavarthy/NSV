@@ -65,6 +65,10 @@ def click_button():
     st.session_state.clicked = True
     
 def fillup(row_vals, geo_lookup, risk_factor_lookup):
+
+    states = geo_lookup["STATE"].unique()
+    states = np.insert(states, 0, "select a state", axis=0)
+
     st.title("School Risk Assessment Form")
     st.markdown(
     """
@@ -77,15 +81,19 @@ def fillup(row_vals, geo_lookup, risk_factor_lookup):
     unsafe_allow_html=True,
     )
     #st.markdown(nsv_caption, unsafe_allow_html=True)
-    st.session_state.county = ""
-    if row_vals["county"]:
-       st.session_state.county = row_vals["county"]
-    st.session_state.county= st.text_input("School County", st.session_state.county)
 
     st.session_state.state = ""
     if row_vals["state"]:
        st.session_state.state = row_vals["state"]
-    st.session_state.state = st.text_input("School State", st.session_state.state)
+    st.session_state.state = st.selectbox("School State", states, )
+
+    #county = geo_lookup["COUNTY"].groupby(st.session_state.state).unique()
+    county = geo_lookup.query("STATE==@st.session_state.state")["COUNTY"].unique()
+    county = np.insert(county, 0, "select a county", axis=0)
+    st.session_state.county = ""
+    if row_vals["county"]:
+       st.session_state.county = row_vals["county"]
+    st.session_state.county= st.selectbox("School County", county)
 
     school_type_lst = ["", "Elementary", "Middle School", "High School"]
     school_type_ind = school_type_lst.index(row_vals["school_level_type"])
@@ -235,6 +243,10 @@ def fillup(row_vals, geo_lookup, risk_factor_lookup):
     unsafe_allow_html=True,
     )
 
+def getStatesFromDB(geo_lookup):
+    states = geo_lookup["state"].unique()
+    print(states)
+
 def main():
     filename = "/app/nsv/data/12Samples.csv"
     sampleData = read_samples(filename)
@@ -242,6 +254,8 @@ def main():
     geo_lookup = pd.read_csv('data/geo_lookup.csv')
     risk_factor_lookup = pd.read_csv('data/risk_factor_lookup.csv')
 
+    states = getStatesFromDB(geo_lookup)
+ 
     #ind = random.randint(0, num_samples-1)
     #st.title("School Risk Assessment Form")
     print("session state = ", st.session_state)
