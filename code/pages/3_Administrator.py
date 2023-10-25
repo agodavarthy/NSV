@@ -80,7 +80,6 @@ def fillup(row_vals, geo_lookup, risk_factor_lookup):
     unsafe_allow_html=True,
     )
 
-    st.markdown("""<hr>""", unsafe_allow_html=True)
     st.markdown(
     """
     <div>
@@ -93,6 +92,7 @@ def fillup(row_vals, geo_lookup, risk_factor_lookup):
     )
     #st.markdown(nsv_caption, unsafe_allow_html=True)
 
+    st.markdown("""<hr>""", unsafe_allow_html=True)
     st.session_state.state = ""
     if row_vals["state"]:
        st.session_state.state = row_vals["state"]
