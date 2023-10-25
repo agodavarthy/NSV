@@ -73,7 +73,7 @@ def fillup(row_vals, geo_lookup, risk_factor_lookup):
     """
     <div>
     <h2 style="color:black">
-    "School Risk Assessment Form" 
+    School Risk Assessment Form 
     </h2>
     </div>
     """,
