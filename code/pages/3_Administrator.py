@@ -4,8 +4,7 @@ import datetime
 import pandas as pd
 import numpy as np
 import math
-import pages.swb_noschoolviolence_analysis as swb
-#import app.nsv.code.swb_noschoolviolence_analysis as swd
+import swb_noschoolviolence_analysis as swb
 
 
 #import SessionState
@@ -72,7 +71,8 @@ def fillup(row_vals, geo_lookup, risk_factor_lookup):
     st.title("School Risk Assessment Form")
     st.markdown(
     """
-    <div style="background-color:lightgray">
+    #<div style="background-color:lightgray">
+    <div>
     <h6 style="color:black">
     Please fill in this form so your school and your community can be compared to the 14,232 schools and communities having experienced a school shooting or violence preceding a shooting. This comparsion will provide both a detailed risk percentage by data category as well as an overall percentile ranking. Once specific vulnerables are identfied, you will be provided with options to lessen or remove those vulnerabilities.
     </h6>
@@ -195,7 +195,7 @@ def fillup(row_vals, geo_lookup, risk_factor_lookup):
             #dates_of_reports = st.text_input("Dates of reports?", row_vals["dates_of_reports"])
     result = ""
 
-    st.session_state.button = st.button('Inference', on_click=click_button)
+    st.session_state.button = st.button('Query', on_click=click_button)
     if st.session_state.button:
         #prediction_result, prediction_color = prediction(st.session_state.school_level_type, st.session_state.school_address_zip, st.session_state.num_teachers, st.session_state.num_psych_couns, st.session_state.num_enrolled_students, st.session_state.num_violent_events_total, st.session_state.num_suicide_events, st.session_state.num_times_guns_brought_school, st.session_state.num_bullying_occurrences, st.session_state.school_hours_and_reported_provocation, st.session_state.sporting_event, st.session_state.nearby_school)
         risk_levels = swb.geo_risk_lookup(county=st.session_state.county, state=st.session_state.state, geo_lookup=geo_lookup, risk_factor_lookup=risk_factor_lookup)
@@ -204,13 +204,13 @@ def fillup(row_vals, geo_lookup, risk_factor_lookup):
         print(risk_levels.iloc[0]["risk_level"])
         total_risk_factor = risk_levels.iloc[0]["risk_level"] 
         if total_risk_factor =="low" or total_risk_factor == "very low":
-            prediction_result = "Low vulnerability index - keep up the good work"
+            prediction_result = "Low vulnerability indication - keep up the good work"
             prediction_color = "green"  # Color for a positive result
         elif total_risk_factor == "medium":
-            prediction_result = "Moderate vulnerability index - close vigilance needed"
+            prediction_result = "Moderate vulnerability indication - Recommended Solutions"
             prediction_color = "orange"  # Color for a negative result
         elif total_risk_factor == "high":
-            prediction_result = "High vulnerability index - immediate corrective action required"
+            prediction_result = "High vulnerability indication - Recommended Solutions"
             prediction_color = "red"  # Color for a negative result
         else:
             prediction_result = "Invalid county info not available"
