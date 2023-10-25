@@ -72,6 +72,7 @@ def fillup(row_vals, geo_lookup, risk_factor_lookup):
     st.markdown(
     """
     <div>
+    <hr/>
     <h8 style="color:black">
     Please fill in this form so your school and your community can be compared to the 14,232 schools and communities having experienced a school shooting or violence preceding a shooting. This comparsion will provide both a detailed risk percentage by data category as well as an overall percentile ranking. Once specific vulnerables are identfied, you will be provided with options to lessen or remove those vulnerabilities.
     </h8>
