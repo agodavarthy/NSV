@@ -233,7 +233,7 @@ def fillup(row_vals, geo_lookup, risk_factor_lookup):
         
     st.markdown(
     """
-    <div style="background-color:lightgray">
+    <div>
     <h8 style="color:black">
     *Zip Codes are needed so the unique demographics of your city can be compared with those of the 14,232 schools having experienced a school shooting or having certain percentages of school violence. Such compared categories are medium household income, estimated per capita, income? Estimated medium house or condo value, median, gross rent, percentage of rentals to ownership, percentage of residence, living in poverty, ethnicity percentages, percentages of murders, rapes, robberies, assault, burglaries, theft, auto theft, arson, number of full timeline enforcement employees, Number of residents foreign born, unemployment rate, list of common industries, list of common occupations, climate averages by month, number of psychologist and adolescent psychologists, average household size, percentage of family household, percentage of households with unmarried partners, number of gun stores, number of gun shows, number of theaters, religion adherence, obesity rates, preschool, obesity, rates, people feeling badly about themselves, percentage of alcohol or consumers,and average property taxes. Data Sources: City Data
     </h8>
