@@ -69,7 +69,7 @@ def fillup(row_vals, geo_lookup, risk_factor_lookup):
     states = np.insert(states, 0, "select a state", axis=0)
 
     st.title("School Risk Assessment Form")
-    <hr/>
+    st.markdown("""<hr>""", unsafe_allow_html=True)
     st.markdown(
     """
     <div>
