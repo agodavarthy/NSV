@@ -68,13 +68,24 @@ def fillup(row_vals, geo_lookup, risk_factor_lookup):
     states = geo_lookup["STATE"].unique()
     states = np.insert(states, 0, "select a state", axis=0)
 
-    st.title("School Risk Assessment Form")
+    #st.title("School Risk Assessment Form")
+    st.markdown(
+    """
+    <div>
+    <h2 style="color:black">
+    "School Risk Assessment Form" 
+    </h2>
+    </div>
+    """,
+    unsafe_allow_html=True,
+    )
+
     st.markdown("""<br>""", unsafe_allow_html=True)
     st.markdown(
     """
     <div>
     <h8 style="color:black">
-    Please fill in this form so your school and your community can be compared to the 14,232 schools and communities having experienced a school shooting or violence preceding a shooting. This comparsion will provide both a detailed risk percentage by data category as well as an overall percentile ranking. Once specific vulnerables are identfied, you will be provided with options to lessen or remove those vulnerabilities.
+    Please fill in this form so your school and your community can be compared to the 14,232 schools and communities having experienced a school shooting or violence. This comparsion will provide both a detailed risk percentage by data category as well as an overall percentile ranking. Once specific vulnerables are identfied, you will be provided with options to lessen or remove those vulnerabilities.
     </h8>
     </div>
     """,
