@@ -1,7 +1,7 @@
 import streamlit as st
 import random
 import base64
-from st-pages import Page, show_pages, add_page_title
+from streamlit_pages import Page, show_pages, add_page_title
 
 def welcome():
     return 'welcome all'
