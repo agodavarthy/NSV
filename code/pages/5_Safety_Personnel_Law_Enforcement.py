@@ -7,8 +7,6 @@ def welcome():
     return 'welcome all'
 
 def main():
-    #st.set_page_config(page_title = "Safety Personnel/Law Enforcement")
-    st.sidebar.markdown("Safety Personnel/Law Enforcement")
     st.title("School Risk Assessment Form")
 
     st.markdown(
