@@ -1,4 +1,3 @@
-st_pages
 altair==5.1.1
 arrow==1.3.0
 attrs==23.1.0
@@ -67,6 +66,7 @@ scipy==1.11.3
 six==1.16.0
 smmap==5.0.1
 soupsieve==2.4.1
+st-pages==0.4.5
 statsmodels==0.14.0
 streamlit==1.26.0
 tenacity==8.2.3
