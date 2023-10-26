@@ -31,6 +31,16 @@ def set_jpeg_as_page_bg(jpeg_file):
 
 def main():
     st.title("SafeSchoolNetwork")
+    #st.set_page_config(
+    #    initial_sidebar_state="expanded",
+    #    menu_items={
+    #        "Parents", "code/pages/1_Parents.py",
+    #        "Teachers", "code/pages/2_Teachers.py",
+    #        "Administrator", "code/pages/3_Administrator.py",
+    #        "Counselor/Psychologist", "code/pages/4_Counselor_Psychologist.py",
+    #        "Safety Personnel/Law Enforcement", "code/pages/5_Safety_Personnel_Law_Enforcement.py"
+    #    }
+    #)
     #app = MultiPage()
     #app.st = st
 
@@ -42,16 +52,17 @@ def main():
 
     #app.run()
     set_jpeg_as_page_bg('data/homepic.jpeg')
-    #st.sidebar.success("")
-    #show_pages(
-    #    [
-    #        Page("code/pages/1_Parents.py", "Parents"),
-    #        Page("code/pages/2_Teachers.py", "Teachers"),
-    #        Page("code/pages/3_Administrator.py", "Administrator"),
-    #        Page("code/pages/4_Counselor_Psychologist.py", "Counselor/Psychologist"),
-    #        Page("code/pages/5_Safety_Personnel_Law_Enforcement.py", "Safety Personnel/Law Enforcement"),
-    #    ]
-    #)
+    st.sidebar.success("")
+    show_pages(
+        [
+            Page("code/Home.py", "Home"),
+            Page("code/pages/2_Parents.py", "Parents"),
+            Page("code/pages/3_Teachers.py", "Teachers"),
+            Page("code/pages/4_Administrator.py", "Administrator"),
+            Page("code/pages/5_Counselor_Psychologist.py", "Counselor/Psychologist"),
+            Page("code/pages/6_Safety_Personnel_Law_Enforcement.py", "Safety Personnel/Law Enforcement"),
+        ]
+    )
 
 
 if __name__ == '__main__':
