@@ -1,6 +1,7 @@
 import streamlit as st
 import random
 import base64
+from st_pages import Page, show_pages, add_page_title
 
 def welcome():
     return 'welcome all'
@@ -16,7 +17,7 @@ def set_jpeg_as_page_bg(jpeg_file):
     <style>
     .stApp{ 
     background-image: url("data:image/jpeg;base64,%s");
-    background-size: 1800px, 800px;
+    background-size: 1200px, 100px;
     background-repeat: no-repeat;
 
     }
@@ -30,8 +31,18 @@ def set_jpeg_as_page_bg(jpeg_file):
 def main():
     st.title("SafeSchoolNetwork")
 
-    set_jpeg_as_page_bg('data/classroom.jpeg')
+    set_jpeg_as_page_bg('data/homepic.jpeg')
     #st.sidebar.success("")
+    show_pages(
+        [
+            Page("code/pages/1_Parents.py", "Parents"),
+            Page("code/pages/2_Teachers.py", "Teachers"),
+            Page("code/pages/3_Administrator.py", "Administrator"),
+            Page("code/pages/4_Counselor_Psychologist.py", "Counselor/Psychologist"),
+            Page("code/pages/5_Safety_Personnel_Law_Enforcement.py", "Safety Personnel/Law Enforcement"),
+        ]
+    )
+
 
 if __name__ == '__main__':
     main()

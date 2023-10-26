@@ -16,7 +16,7 @@ def read_samples(filename):
     sample_file = pd.read_csv(filename)
     return sample_file
     
-def prediction(school_level_type, school_address_zip, num_teachers, num_psych_couns, num_enrolled_students, num_violent_events_total, num_suicide_events, num_times_guns_brought_school, num_bullying_occurrences, school_hours_and_reported_provocation, sporting_event, nearby_school):
+def prediction(school_level_type, school_address_zip, num_teachers, num_psych_couns, num_enrolled_students, num_violent_events_total, num_suicide_events, num_times_guns_brought_school, num_bullying_occurrences, school_hours_and_reported_provocation, sporting_event, nearby_school, crime_rate_swb):
     school_level_num = {'Elementary': 1, 'Middle School': 2, 'High School': 3}
     #rand_num = random.uniform(0, 1)
     rand_num = 0.1
@@ -35,10 +35,17 @@ def prediction(school_level_type, school_address_zip, num_teachers, num_psych_co
 
     risk_factor = school_level_num[school_level_type] * num_provocations * num_bullying_occurrences*num_violent_events_total*num_times_guns_brought_school*((num_teachers/num_enrolled_students)+(num_psych_couns/num_enrolled_students))
     
+    print("pre risk_factor = ", risk_factor)
+    print("crime_rate_swb = ", crime_rate_swb)
+    risk_factor *= crime_rate_swb 
+    print("post risk_factor = ", risk_factor)
     risk_factor = math.log(risk_factor)
+    print("log risk_factor = ", risk_factor)
     
-    #total_risk_factor = rand_num * risk_factor 
     total_risk_factor = risk_factor * (1/10)
+    print("total_risk_factor = ", total_risk_factor)
+    return total_risk_factor
+    """
     print("Total Risk Factor = ", total_risk_factor)
     if total_risk_factor < 0.3:
         prediction_result = "Low vulnerability index - keep up the good work"
@@ -52,6 +59,7 @@ def prediction(school_level_type, school_address_zip, num_teachers, num_psych_co
         prediction_color = "red"  # Color for a negative result
 
     return prediction_result, prediction_color
+    """
 
 def buildDict(df, row_id):
     row_dic = {}
@@ -96,26 +104,27 @@ def fillup(row_vals, geo_lookup, risk_factor_lookup):
     st.session_state.state = ""
     if row_vals["state"]:
        st.session_state.state = row_vals["state"]
-    st.session_state.state = st.selectbox("School State", states, )
+    st.session_state.state = st.selectbox("School State*", states, label_visibility="visible")
 
     #county = geo_lookup["COUNTY"].groupby(st.session_state.state).unique()
     county = geo_lookup.query("STATE==@st.session_state.state")["COUNTY"].unique()
     county = np.insert(county, 0, "select a county", axis=0)
+
     st.session_state.county = ""
     if row_vals["county"]:
        st.session_state.county = row_vals["county"]
-    st.session_state.county= st.selectbox("School County", county)
+    st.session_state.county= st.selectbox("School County*", county, label_visibility="visible")
 
     school_type_lst = ["", "Elementary", "Middle School", "High School"]
     school_type_ind = school_type_lst.index(row_vals["school_level_type"])
-    st.session_state.school_level_type = st.selectbox("School Level/Type", school_type_lst, school_type_ind)
+    st.session_state.school_level_type = st.selectbox("School Level/Type", school_type_lst, school_type_ind, label_visibility="visible")
     zip_code = str(row_vals["school_address_zip"])
     if len(zip_code) < 5:
         while len(zip_code) < 5:
             zip_code = "0" + zip_code
-        st.session_state.school_address_zip = st.text_input("School Zip Code*", zip_code)
+        st.session_state.school_address_zip = st.text_input("School Zip Code", zip_code)
     else:       
-        st.session_state.school_address_zip = st.text_input("School Zip Code*", row_vals["school_address_zip"])
+        st.session_state.school_address_zip = st.text_input("School Zip Code", row_vals["school_address_zip"])
 
     st.write("Hours of Operation")
     col1, col2 = st.columns(2)
@@ -212,42 +221,98 @@ def fillup(row_vals, geo_lookup, risk_factor_lookup):
         risk_levels = swb.geo_risk_lookup(county=st.session_state.county, state=st.session_state.state, geo_lookup=geo_lookup, risk_factor_lookup=risk_factor_lookup)
         print(type(risk_levels))
         print(risk_levels.iloc[0]["violance occurance rate"])
+        print(type(risk_levels.iloc[0]["violance occurance rate"]))
         print(risk_levels.iloc[0]["risk_level"])
-        total_risk_factor = risk_levels.iloc[0]["risk_level"] 
-        if total_risk_factor =="low" or total_risk_factor == "very low":
+        st.session_state.crime_rate = risk_levels.iloc[0]["violance occurance rate"]
+        total_risk_factor = prediction(st.session_state.school_level_type, st.session_state.school_address_zip, st.session_state.num_teachers, st.session_state.num_psych_couns, st.session_state.num_enrolled_students, st.session_state.num_violent_events_total, st.session_state.num_suicide_events, st.session_state.num_times_guns_brought_school, st.session_state.num_bullying_occurrences, st.session_state.school_hours_and_reported_provocation, st.session_state.sporting_event, st.session_state.nearby_school, st.session_state.crime_rate)
+        if total_risk_factor <= 0.3:
             prediction_result = "Low vulnerability indication - keep up the good work"
             prediction_color = "green"  # Color for a positive result
-        elif total_risk_factor == "medium":
+        elif total_risk_factor > 0.3 and total_risk_factor <= 0.69:
             prediction_result = "Moderate vulnerability indication - Recommended Solutions"
             prediction_color = "orange"  # Color for a negative result
-        elif total_risk_factor == "high":
+        elif total_risk_factor > 0.69:
             prediction_result = "High vulnerability indication - Recommended Solutions"
             prediction_color = "red"  # Color for a negative result
         else:
             prediction_result = "Invalid county info not available"
             prediction_color = "black"  # Color for a negative result
 
-        #st.session_state.inference_text =  st.text("", "")
-        #st.markdown(
-        #"""
-        #f'<p style="color: {prediction_color}; font-size: 18px;"> {prediction_result}</p>'
-        #""",
-        #unsafe_allow_html=True,
-        #)
-		#st.text(f'<p style="color: {prediction_color}; font-size: 18px;"> {prediction_result}</p>')
+        if risk_levels.iloc[1]['risk_level'] == "low" or risk_levels.iloc[1]['risk_level'] == "very low":
+            pred1_res = str(risk_levels.iloc[1]['factor']) + " - "+risk_levels.iloc[1]['risk_level']
+            pred1_col = "green"
+        elif risk_levels.iloc[1]['risk_level'] == "medium": 
+            pred1_res = str(risk_levels.iloc[1]['factor']) + " - "+risk_levels.iloc[1]['risk_level']
+            pred1_col = "orange"
+        elif risk_levels.iloc[1]['risk_level'] == "high": 
+            pred1_res = str(risk_levels.iloc[1]['factor']) + " - "+risk_levels.iloc[1]['risk_level']
+            pred1_col = "red"
+
+        if risk_levels.iloc[2]['risk_level'] == "low" or risk_levels.iloc[2]['risk_level'] == "very low":
+            pred2_res = str(risk_levels.iloc[2]['factor']) + " - "+risk_levels.iloc[2]['risk_level']
+            pred2_col = "green"
+        elif risk_levels.iloc[2]['risk_level'] == "medium":
+            pred2_res = str(risk_levels.iloc[2]['factor']) + " - "+risk_levels.iloc[2]['risk_level']
+            pred2_col = "orange"
+        elif risk_levels.iloc[2]['risk_level'] == "high":
+            pred2_res = str(risk_levels.iloc[2]['factor']) + " - "+risk_levels.iloc[2]['risk_level']
+            pred2_col = "red"
+
+        if risk_levels.iloc[3]['risk_level'] == "low" or risk_levels.iloc[3]['risk_level'] == "very low":
+            pred3_res = str(risk_levels.iloc[3]['factor']) + " - "+risk_levels.iloc[3]['risk_level']
+            pred3_col = "green"
+        elif risk_levels.iloc[3]['risk_level'] == "medium":
+            pred3_res = str(risk_levels.iloc[3]['factor']) + " - "+risk_levels.iloc[3]['risk_level']
+            pred3_col = "orange"
+        elif risk_levels.iloc[3]['risk_level'] == "high":
+            pred3_res = str(risk_levels.iloc[3]['factor']) + " - "+risk_levels.iloc[3]['risk_level']
+            pred3_col = "red"
+
+
+        if risk_levels.iloc[4]['risk_level'] == "low" or risk_levels.iloc[4]['risk_level'] == "very low":
+            pred4_res = str(risk_levels.iloc[4]['factor']) + " - "+risk_levels.iloc[4]['risk_level']
+            pred4_col = "green"
+        elif risk_levels.iloc[4]['risk_level'] == "medium":
+            pred4_res = str(risk_levels.iloc[4]['factor']) + " - "+risk_levels.iloc[4]['risk_level']
+            pred4_col = "orange"
+        elif risk_levels.iloc[4]['risk_level'] == "high":
+            pred4_res = str(risk_levels.iloc[4]['factor']) + " - "+risk_levels.iloc[4]['risk_level']
+            pred4_col = "red"
+
+
+        print("str(risk_levels.iloc[1][0]) = ", str(risk_levels.iloc[1]['factor']))
+        print("str(risk_levels.iloc[2][0]) = ", str(risk_levels.iloc[2]['factor']))
+        print("str(risk_levels.iloc[3][0]) = ", str(risk_levels.iloc[3]['factor']))
+        print("str(risk_levels.iloc[1]['risk_level']) = ", str(risk_levels.iloc[1]['risk_level']))
+        print("str(risk_levels.iloc[2]['risk_level']) = ", str(risk_levels.iloc[2]['risk_level']))
+        print("str(risk_levels.iloc[3]['risk_level']) = ", str(risk_levels.iloc[3]['risk_level']))
+        print("str(risk_levels.iloc[1]['violance occurance rate']) = ", str(risk_levels.iloc[1]['violance occurance rate']))
+        print("str(risk_levels.iloc[2]['violance occurance rate']) = ", str(risk_levels.iloc[2]['violance occurance rate']))
+        print("str(risk_levels.iloc[3]['violance occurance rate']) = ", str(risk_levels.iloc[3]['violance occurance rate']))
+        print(risk_levels)
         st.markdown(
            f'<p style="color: {prediction_color}; font-size: 18px;"> {prediction_result}</p>',
             unsafe_allow_html=True
         )
-        st.session_state.button = False
-        #st.session_state.inference_text = " "
-        #st.inference("")
+        st.markdown(
+           f'<p style="color: {"black"}; font-size: 18px;"> {pred1_res}</p>',
+            unsafe_allow_html=True
+        )
+        st.markdown(
+           f'<p style="color: {"black"}; font-size: 18px;"> {pred3_res}</p>',
+            unsafe_allow_html=True
+        )
+        st.markdown(
+           f'<p style="color: {"black"}; font-size: 18px;"> {pred4_res}</p>',
+            unsafe_allow_html=True
+        )
         
+        st.session_state.button = False
     st.markdown(
     """
     <div>
     <h8 style="color:black">
-    *Zip Codes are needed so the unique demographics of your city can be compared with those of the 14,232 schools having experienced a school shooting or having certain percentages of school violence. Such compared categories are medium household income, estimated per capita, income? Estimated medium house or condo value, median, gross rent, percentage of rentals to ownership, percentage of residence, living in poverty, ethnicity percentages, percentages of murders, rapes, robberies, assault, burglaries, theft, auto theft, arson, number of full timeline enforcement employees, Number of residents foreign born, unemployment rate, list of common industries, list of common occupations, climate averages by month, number of psychologist and adolescent psychologists, average household size, percentage of family household, percentage of households with unmarried partners, number of gun stores, number of gun shows, number of theaters, religion adherence, obesity rates, preschool, obesity, rates, people feeling badly about themselves, percentage of alcohol or consumers,and average property taxes. Data Sources: City Data
+    Zip Codes are needed so the unique demographics of your city can be compared with those of the 14,232 schools having experienced a school shooting or having certain percentages of school violence. Such compared categories are medium household income, estimated per capita, income? Estimated medium house or condo value, median, gross rent, percentage of rentals to ownership, percentage of residence, living in poverty, ethnicity percentages, percentages of murders, rapes, robberies, assault, burglaries, theft, auto theft, arson, number of full timeline enforcement employees, Number of residents foreign born, unemployment rate, list of common industries, list of common occupations, climate averages by month, number of psychologist and adolescent psychologists, average household size, percentage of family household, percentage of households with unmarried partners, number of gun stores, number of gun shows, number of theaters, religion adherence, obesity rates, preschool, obesity, rates, people feeling badly about themselves, percentage of alcohol or consumers,and average property taxes. Data Sources: City Data
     </h8>
     </div>
     """,
@@ -259,7 +324,7 @@ def getStatesFromDB(geo_lookup):
     print(states)
 
 def main():
-    filename = "/app/nsv/data/12Samples.csv"
+    filename = "data/12Samples.csv"
     sampleData = read_samples(filename)
     num_samples = len(sampleData)
     geo_lookup = pd.read_csv('data/geo_lookup.csv')
@@ -269,9 +334,9 @@ def main():
     #st.title("School Risk Assessment Form")
     print("session state = ", st.session_state)
     if 'clicked' not in st.session_state:
-        st.session_state.ind = random.sample(range(num_samples), 1)[0]
+        #st.session_state.ind = random.sample(range(num_samples), 1)[0]
+        st.session_state.ind = 5
         st.session_state.row_vals = buildDict(sampleData, st.session_state.ind)
-
         st.session_state.clicked = False
     fillup(st.session_state.row_vals, geo_lookup, risk_factor_lookup)
 
