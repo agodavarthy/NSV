@@ -52,7 +52,7 @@ def main():
 
     #app.run()
     set_jpeg_as_page_bg('data/homepic.jpeg')
-    st.sidebar.success("")
+    #st.sidebar.success("")
     show_pages(
         [
             Page("code/Home.py", "Home"),
