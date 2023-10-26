@@ -3,3 +3,5 @@ geographiclib==2.0
 geopy==2.4.0
 matplotlib==3.8.0
 st-pages=0.4.5
+streamlit==1.26.0
+streamlit-multipage==0.0.18
