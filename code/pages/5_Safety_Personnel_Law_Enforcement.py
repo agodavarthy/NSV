@@ -1,7 +1,4 @@
 import streamlit as st
-import random
-import matplotlib.pyplot as plt
-import datetime
 
 def welcome():
     return 'welcome all'
@@ -20,7 +17,7 @@ def main():
     unsafe_allow_html=True,
     )
     st.markdown(
-	"""<h1>Counselors Form</h1>""", 
+	"""<h1>Safety Personnel</h1>""", 
 	
 	unsafe_allow_html=True)
 

@@ -1,7 +1,4 @@
 import streamlit as st
-import random
-import matplotlib.pyplot as plt
-import datetime
 
 def welcome():
     return 'welcome all'

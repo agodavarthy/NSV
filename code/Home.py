@@ -1,7 +1,8 @@
 import streamlit as st
 import random
 import base64
-from streamlit_pages import Page, show_pages, add_page_title
+from st_pages import Page, show_pages, add_page_title
+from streamlit_multipage import MultiPage
 
 def welcome():
     return 'welcome all'
@@ -30,18 +31,27 @@ def set_jpeg_as_page_bg(jpeg_file):
 
 def main():
     st.title("SafeSchoolNetwork")
+    #app = MultiPage()
+    #app.st = st
 
+    #app.add_app("Parents", "code/pages/1_Parents.py")
+    #app.add_app("Teachers", "code/pages/2_Teachers.py")
+    #app.add_app("Administrator", "code/pages/3_Administrator.py")
+    #app.add_app("Counselor/Psychologist", "code/pages/4_Counselor_Psychologist.py")
+    #app.add_app("DudeSafety Personnel/Law Enforcement", "code/pages/5_Safety_Personnel_Law_Enforcement.py")
+
+    #app.run()
     set_jpeg_as_page_bg('data/homepic.jpeg')
     #st.sidebar.success("")
-    show_pages(
-        [
-            Page("code/pages/1_Parents.py", "Parents"),
-            Page("code/pages/2_Teachers.py", "Teachers"),
-            Page("code/pages/3_Administrator.py", "Administrator"),
-            Page("code/pages/4_Counselor_Psychologist.py", "Counselor/Psychologist"),
-            Page("code/pages/5_Safety_Personnel_Law_Enforcement.py", "Safety Personnel/Law Enforcement"),
-        ]
-    )
+    #show_pages(
+    #    [
+    #        Page("code/pages/1_Parents.py", "Parents"),
+    #        Page("code/pages/2_Teachers.py", "Teachers"),
+    #        Page("code/pages/3_Administrator.py", "Administrator"),
+    #        Page("code/pages/4_Counselor_Psychologist.py", "Counselor/Psychologist"),
+    #        Page("code/pages/5_Safety_Personnel_Law_Enforcement.py", "Safety Personnel/Law Enforcement"),
+    #    ]
+    #)
 
 
 if __name__ == '__main__':
