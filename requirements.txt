@@ -67,6 +67,7 @@ six==1.16.0
 smmap==5.0.1
 soupsieve==2.4.1
 st-pages==0.4.5
+st_pages==0.4.5
 statsmodels==0.14.0
 streamlit==1.26.0
 tenacity==8.2.3
