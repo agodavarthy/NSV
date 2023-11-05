@@ -18,7 +18,8 @@ def set_jpeg_as_page_bg(jpeg_file):
     <style>
     .stApp{ 
     background-image: url("data:image/jpeg;base64,%s");
-    background-size: 1200px, 100px;
+    background-position:  420px 20px;
+    background-size:  800px 900px;
     background-repeat: no-repeat;
 
     }
@@ -51,7 +52,7 @@ def main():
     #app.add_app("DudeSafety Personnel/Law Enforcement", "code/pages/5_Safety_Personnel_Law_Enforcement.py")
 
     #app.run()
-    set_jpeg_as_page_bg('data/homepic.jpeg')
+    set_jpeg_as_page_bg('data/SSN.jpeg')
     #st.sidebar.success("")
     show_pages(
         [
