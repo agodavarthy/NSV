@@ -31,7 +31,7 @@ def set_jpeg_as_page_bg(jpeg_file):
 
 
 def main():
-    st.title("SafeSchoolNetwork")
+    #st.title("SafeSchoolNetwork")
     #st.set_page_config(
     #    initial_sidebar_state="expanded",
     #    menu_items={
