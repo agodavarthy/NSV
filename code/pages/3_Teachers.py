@@ -3,7 +3,7 @@ import random
 import matplotlib.pyplot as plt
 from st_pages import Page, show_pages
 import datetime
-from code/../utils import image
+from code/utils import image
 
 def welcome():
     return 'welcome all'
