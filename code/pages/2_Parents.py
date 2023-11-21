@@ -2,7 +2,7 @@ import streamlit as st
 import random
 from st_pages import Page, show_pages
 import datetime
-from utils import image
+import image
 
 def welcome():
     return 'welcome all'
